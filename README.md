@@ -1,4 +1,4 @@
-# mono-display
+# adb-mono-screen
 
 스마트폰 디톡스를 위한 초경량 자동 흑백(Monochrome) & 50% 파스텔톤 유지 안드로이드 백그라운드 서비스 앱입니다.
 
