@@ -1,46 +1,46 @@
-# adb-mono-screen
+# MonoScreen
 
-스마트폰 디톡스를 위한 초경량 자동 흑백(Monochrome) & 50% 파스텔톤 유지 안드로이드 백그라운드 서비스 앱입니다.
-
----
-
-## ✨ 핵심 기능
-
-1. **상시 흑백 모드 자동 복구**:
-   - 화면을 끄거나(`SCREEN_OFF`), 켜거나(`SCREEN_ON`), 잠금을 풀 때(`USER_PRESENT`) 즉시 시스템 흑백 모드(`accessibility_display_daltonizer_enabled = 1`)를 다시 적용합니다.
-2. **50% 파스텔톤 채도 유지**:
-   - 배달앱이나 지도 등을 확인하기 위해 상단 빠른 설정 타일에서 흑백 모드를 잠시 끌 경우, 100% 쨍한 원색이 아닌 **50% 채도(물 빠진 파스텔톤)** 로 화면이 표시되어 눈의 피로와 도파민 자극을 최소화합니다.
-3. **초경량 & 무광고**:
-   - UI/불필요한 종속성 없는 네이티브 단일 백그라운드 서비스 구조 (메모리 점유율 극소).
-4. **부팅 자동 시작**:
-   - 기기 재부팅(`BOOT_COMPLETED`) 시 자동으로 서비스가 시작됩니다.
+A lightweight Android background service for smartphone digital detox. Automatically restores 100% grayscale upon screen events and maintains a 50% pastel saturation baseline when color is toggled.
 
 ---
 
-## 🚀 설치 및 설정 방법
+## ✨ Key Features
 
-### 1. APK 설치
-GitHub Releases에서 `app-debug.apk`를 다운로드하거나 빌드 후 설치합니다.
+1. **Auto Grayscale Lock**:
+   - Automatically re-enables 100% grayscale (`accessibility_display_daltonizer_enabled = 1`) whenever the screen turns off (`ACTION_SCREEN_OFF`), turns on (`ACTION_SCREEN_ON`), or is unlocked (`ACTION_USER_PRESENT`).
+2. **50% Pastel Saturation Baseline**:
+   - When temporarily turning off grayscale from Quick Settings tiles (e.g., for maps or camera), the system displays colors at **50% saturation (subdued pastel tones)** rather than 100% vivid colors, reducing eye strain and dopamine stimulation.
+3. **Ultra Lightweight & Ad-Free**:
+   - Single native background service with near-zero memory footprint and no unnecessary dependencies.
+4. **Auto-Start on Boot**:
+   - Automatically registers and starts via `BOOT_COMPLETED` receiver upon device restart.
+
+---
+
+## 🚀 Installation & Setup
+
+### 1. Install APK
+Download `app-debug.apk` from GitHub Actions / Releases or build locally, then install via ADB:
 
 ```bash
 adb install -r app-debug.apk
 ```
 
-### 2. 권한 부여 (최초 1회 필수)
-시스템 설정을 변경하기 위한 보안 권한을 부여합니다.
+### 2. Grant Permissions (One-Time Setup)
+Grant secure settings write permission via ADB:
 
 ```bash
 adb shell pm grant com.custom.grayscaleauto android.permission.WRITE_SECURE_SETTINGS
 ```
 
-### 3. 시스템 채도 50% 설정 (옵션/권장)
-흑백을 해제했을 때 50% 채도로 유지되도록 설정합니다.
+### 3. Set Baseline 50% Saturation (Recommended)
+Set the system-wide saturation level to 50%:
 
 ```bash
 adb shell cmd color_display set-saturation 50
 ```
 
-### 4. 앱 실행
+### 4. Start Service
 ```bash
 adb shell am start -n com.custom.grayscaleauto/.MainActivity
 ```

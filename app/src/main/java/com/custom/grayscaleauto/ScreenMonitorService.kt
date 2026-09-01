@@ -68,14 +68,14 @@ class ScreenMonitorService : Service() {
     }
 
     private fun startAsForeground() {
-        val channelId = "grayscale_monitor_channel"
+        val channelId = "monoscreen_channel"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
-                "Grayscale Service",
+                "MonoScreen Service",
                 NotificationManager.IMPORTANCE_MIN
             ).apply {
-                description = "Running in background"
+                description = "MonoScreen background monitor"
                 setShowBadge(false)
             }
             val manager = getSystemService(NotificationManager::class.java)
@@ -84,16 +84,16 @@ class ScreenMonitorService : Service() {
 
         val notification = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Notification.Builder(this, channelId)
-                .setContentTitle("AutoGrayscale")
-                .setContentText("흑백 모니터링 동작 중")
-                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle("MonoScreen")
+                .setContentText("Grayscale monitor active")
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .build()
         } else {
             @Suppress("DEPRECATION")
             Notification.Builder(this)
-                .setContentTitle("AutoGrayscale")
-                .setContentText("흑백 모니터링 동작 중")
-                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle("MonoScreen")
+                .setContentText("Grayscale monitor active")
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .build()
         }
 

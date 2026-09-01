@@ -15,7 +15,7 @@ class MainActivity : Activity() {
         } else {
             startService(serviceIntent)
         }
-        Toast.makeText(this, "자동 흑백 서비스가 활성화되었습니다.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "MonoScreen service activated", Toast.LENGTH_SHORT).show()
         finish()
     }
 }
